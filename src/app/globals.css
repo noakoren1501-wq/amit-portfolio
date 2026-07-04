@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg: #F8F7F2;
+  --color-text: #1A1A1A;
+  --color-accent: #D7B94B;
+  --color-secondary: #172235;
+  --color-border: #E6E6E4;
+  --font-heading: var(--font-heebo);
+  --font-body: var(--font-heebo);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  direction: rtl;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #F8F7F2;
+  color: #1A1A1A;
+  font-family: var(--font-heebo), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heebo), sans-serif;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes lineGrow {
+  from { transform: scaleY(0); opacity: 0; }
+  to   { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes lineExpand {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes ghostReveal {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
