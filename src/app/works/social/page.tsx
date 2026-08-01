@@ -1,14 +1,8 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
 import FadeIn from "@/components/FadeIn";
 import Carousel from "@/components/Carousel";
-import Lightbox from "@/components/Lightbox";
 
 export default function SocialPage() {
-  const [catOpen, setCatOpen] = useState(false);
-
   return (
     <div className="max-w-[1280px] mx-auto px-6 md:px-16 pb-32">
 
@@ -53,9 +47,11 @@ export default function SocialPage() {
               פוסט שמעודד לסרס ולעקר חתולים עד גיל חמישה חודשים — כדי &quot;להאריך להם את התוקף&quot;.
             </p>
           </div>
-          <div
-            className="max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8] cursor-zoom-in"
-            onClick={() => setCatOpen(true)}
+          <a
+            href="/images/social/cat-voice-cover.jpg"
+            target="_blank"
+            rel="noopener"
+            className="block max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8] cursor-zoom-in"
           >
             <Image
               src="/images/social/cat-voice-cover.jpg"
@@ -65,7 +61,7 @@ export default function SocialPage() {
               className="w-full h-auto object-contain max-h-[80vh]"
               sizes="(max-width: 768px) 100vw, 576px"
             />
-          </div>
+          </a>
         </div>
       </FadeIn>
 
@@ -88,7 +84,6 @@ export default function SocialPage() {
           </div>
           <div className="max-w-xl mx-auto">
             <Carousel
-              title="לפעמים גם AI מפספס"
               images={[
                 { src: "/images/social/ai-carousel-1.png", alt: "לפעמים גם AI מפספס – שקופית 1" },
                 { src: "/images/social/ai-carousel-2.png", alt: "לפעמים גם AI מפספס – שקופית 2" },
@@ -103,17 +98,6 @@ export default function SocialPage() {
           </div>
         </div>
       </FadeIn>
-
-      {catOpen && (
-        <Lightbox
-          images={[{ src: "/images/social/cat-voice-cover.jpg", alt: "יש להם מה להגיד – קול החתולים" }]}
-          index={0}
-          title='פוסט לעמותת "קול החתולים"'
-          onClose={() => setCatOpen(false)}
-          onPrev={() => {}}
-          onNext={() => {}}
-        />
-      )}
 
     </div>
   );

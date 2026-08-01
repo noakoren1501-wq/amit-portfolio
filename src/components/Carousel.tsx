@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import Lightbox from "./Lightbox";
 
 export interface ProjectImage {
   src: string;
@@ -11,17 +10,15 @@ export interface ProjectImage {
 
 interface CarouselProps {
   images: ProjectImage[];
-  title?: string;
 }
 
-export default function Carousel({ images, title }: CarouselProps) {
+export default function Carousel({ images }: CarouselProps) {
   // Clone first and last for infinite loop: [last, ...images, first]
   const extended = [images[images.length - 1], ...images, images[0]];
   const total = extended.length;
 
   const [index, setIndex] = useState(1);
   const [transitioning, setTransitioning] = useState(true);
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const touchStartX = useRef<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -51,13 +48,12 @@ export default function Carousel({ images, title }: CarouselProps) {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (lightboxIndex !== null) return;
       if (e.key === "ArrowLeft") next();
       if (e.key === "ArrowRight") prev();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [next, prev, lightboxIndex]);
+  }, [next, prev]);
 
   // Touch / swipe
   const onTouchStart = (e: React.TouchEvent) => {
@@ -74,46 +70,35 @@ export default function Carousel({ images, title }: CarouselProps) {
 
   const realIndex = index === 0 ? images.length - 1 : index === total - 1 ? 0 : index - 1;
 
-  const openLightbox = () => setLightboxIndex(realIndex);
-  const closeLightbox = () => setLightboxIndex(null);
-  const lightboxPrev = () =>
-    setLightboxIndex((i) => (i === null ? 0 : (i - 1 + images.length) % images.length));
-  const lightboxNext = () =>
-    setLightboxIndex((i) => (i === null ? 0 : (i + 1) % images.length));
+  const openImage = () => window.open(images[realIndex].src, "_blank", "noopener");
 
   if (images.length === 1) {
     return (
-      <>
-        <div
-          className="rounded-2xl overflow-hidden bg-[#EEEEE8] flex items-center justify-center cursor-zoom-in"
-          onClick={openLightbox}
-        >
-          <Image
-            src={images[0].src}
-            alt={images[0].alt}
-            width={900}
-            height={1200}
-            className="w-full h-auto object-contain max-h-[80vh]"
-            sizes="(max-width: 768px) 100vw, 1280px"
-            priority
-          />
-        </div>
-        {lightboxIndex !== null && (
-          <Lightbox images={images} index={lightboxIndex} title={title} onClose={closeLightbox} onPrev={lightboxPrev} onNext={lightboxNext} />
-        )}
-      </>
+      <div
+        className="rounded-2xl overflow-hidden bg-[#EEEEE8] flex items-center justify-center cursor-zoom-in"
+        onClick={openImage}
+      >
+        <Image
+          src={images[0].src}
+          alt={images[0].alt}
+          width={900}
+          height={1200}
+          className="w-full h-auto object-contain max-h-[80vh]"
+          sizes="(max-width: 768px) 100vw, 1280px"
+          priority
+        />
+      </div>
     );
   }
 
   return (
-    <>
     <div className="relative select-none" ref={containerRef}>
       {/* Slide track */}
       <div
         className="overflow-hidden rounded-2xl bg-[#EEEEE8] cursor-zoom-in"
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
-        onClick={openLightbox}
+        onClick={openImage}
       >
         <div
           className="flex"
@@ -195,10 +180,5 @@ export default function Carousel({ images, title }: CarouselProps) {
         ))}
       </div>
     </div>
-
-    {lightboxIndex !== null && (
-      <Lightbox images={images} index={lightboxIndex} title={title} onClose={closeLightbox} onPrev={lightboxPrev} onNext={lightboxNext} />
-    )}
-    </>
   );
 }

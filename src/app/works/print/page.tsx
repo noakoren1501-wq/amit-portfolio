@@ -77,7 +77,7 @@ export default function PrintPage() {
               </p>
             </div>
             <div className="max-w-xl mx-auto">
-              <Carousel images={project.images} title={project.title} />
+              <Carousel images={project.images} />
             </div>
           </div>
         </FadeIn>

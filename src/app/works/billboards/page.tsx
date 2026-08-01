@@ -1,14 +1,8 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
 import FadeIn from "@/components/FadeIn";
 import Carousel from "@/components/Carousel";
-import Lightbox from "@/components/Lightbox";
 
 export default function BillboardsPage() {
-  const [shapewearOpen, setShapewearOpen] = useState(false);
-
   return (
     <div className="max-w-[1280px] mx-auto px-6 md:px-16 pb-32">
 
@@ -55,7 +49,6 @@ export default function BillboardsPage() {
           </div>
           <div className="max-w-xl mx-auto">
             <Carousel
-              title='קטשופ "אסם"'
               images={[
                 { src: "/images/billboards/ketchup-1.jpg", alt: "אסם קטשופ – שלט חוצות 1" },
                 { src: "/images/billboards/ketchup-2.jpg", alt: "אסם קטשופ – שלט חוצות 2" },
@@ -83,9 +76,11 @@ export default function BillboardsPage() {
               המחטב &quot;מוריד מידה&quot; — אז האות XL הופכת ל־L.
             </p>
           </div>
-          <div
-            className="max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8] cursor-zoom-in"
-            onClick={() => setShapewearOpen(true)}
+          <a
+            href="/images/billboards/shapewear.jpg"
+            target="_blank"
+            rel="noopener"
+            className="block max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8] cursor-zoom-in"
           >
             <Image
               src="/images/billboards/shapewear.jpg"
@@ -95,20 +90,9 @@ export default function BillboardsPage() {
               className="w-full h-auto object-contain max-h-[80vh]"
               sizes="(max-width: 768px) 100vw, 576px"
             />
-          </div>
+          </a>
         </div>
       </FadeIn>
-
-      {shapewearOpen && (
-        <Lightbox
-          images={[{ src: "/images/billboards/shapewear.jpg", alt: "המחטב – שלט חוצות" }]}
-          index={0}
-          title="תחתונים מחטבים"
-          onClose={() => setShapewearOpen(false)}
-          onPrev={() => {}}
-          onNext={() => {}}
-        />
-      )}
 
     </div>
   );

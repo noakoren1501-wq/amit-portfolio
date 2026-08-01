@@ -1,14 +1,8 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
 import FadeIn from "@/components/FadeIn";
 import Carousel from "@/components/Carousel";
-import Lightbox from "@/components/Lightbox";
 
 export default function GuerrillaPage() {
-  const [halperinOpen, setHalperinOpen] = useState(false);
-
   return (
     <div className="max-w-[1280px] mx-auto px-6 md:px-16 pb-32">
 
@@ -55,7 +49,6 @@ export default function GuerrillaPage() {
           </div>
           <div className="max-w-xl mx-auto">
             <Carousel
-              title="פנגו"
               images={[
                 { src: "/images/guerrilla/pango-floor.jpg", alt: "Pango – כתובת על רצפת החניה" },
                 { src: "/images/guerrilla/pango-screen-1.jpg", alt: "Pango – מסך ניווט ברכב" },
@@ -83,9 +76,11 @@ export default function GuerrillaPage() {
               מתישהו כולנו נצטרך משקפיים. הזמן מתקתק — ושעוני התחנה נראים כמו עדשות.
             </p>
           </div>
-          <div
-            className="max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8] cursor-zoom-in"
-            onClick={() => setHalperinOpen(true)}
+          <a
+            href="/images/guerrilla/halperin.jpg"
+            target="_blank"
+            rel="noopener"
+            className="block max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8] cursor-zoom-in"
           >
             <Image
               src="/images/guerrilla/halperin.jpg"
@@ -95,7 +90,7 @@ export default function GuerrillaPage() {
               className="w-full h-auto object-contain"
               sizes="(max-width: 768px) 100vw, 672px"
             />
-          </div>
+          </a>
         </div>
       </FadeIn>
 
@@ -118,7 +113,6 @@ export default function GuerrillaPage() {
           </div>
           <div className="max-w-xl mx-auto">
             <Carousel
-              title="Tinder"
               images={[
                 { src: "/images/guerrilla/tinder.jpg", alt: "Tinder – פרסומת על קרטון ביצים בסופרמרקט" },
                 { src: "/images/guerrilla/tinder-2.jpg", alt: "Tinder – עיצוב קרטון הביצים" },
@@ -127,17 +121,6 @@ export default function GuerrillaPage() {
           </div>
         </div>
       </FadeIn>
-
-      {halperinOpen && (
-        <Lightbox
-          images={[{ src: "/images/guerrilla/halperin.jpg", alt: "הלפרין – משקפיים ענק בתחנת רכבת" }]}
-          index={0}
-          title="הלפרין"
-          onClose={() => setHalperinOpen(false)}
-          onPrev={() => {}}
-          onNext={() => {}}
-        />
-      )}
 
     </div>
   );

@@ -47,7 +47,10 @@
       "PowerShell(Get-Job)",
       "PowerShell(Get-ChildItem \"C:/Users/noako/AppData/Local/Temp/claude/C--Users-noako-Documents-amit-portfolio/48f85bfb-2629-4501-89f4-8d76812c6b7e/scratchpad/video-opt\" | Select-Object Name, @{N=\"MB\";E={[math]::Round\\($_.Length/1MB,1\\)}})",
       "Bash(git rm *)",
-      "Bash(rm -rf .git)"
+      "Bash(rm -rf .git)",
+      "Bash(git commit -m ' *)",
+      "PowerShell(npm install -g vercel 2>&1)",
+      "PowerShell(vercel --version)"
     ]
   }
 }
