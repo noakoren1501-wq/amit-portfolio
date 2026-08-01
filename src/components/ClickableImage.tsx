@@ -18,10 +18,8 @@ export default function ClickableImage({ src, alt, width, height, sizes, classNa
 
   return (
     <>
-      <div
-        className="rounded-2xl overflow-hidden bg-[#EEEEE8] cursor-zoom-in"
-        onClick={() => setOpen(true)}
-      >
+      {/* position:relative so the transparent overlay can use inset-0 */}
+      <div className="relative rounded-2xl overflow-hidden bg-[#EEEEE8]">
         <Image
           src={src}
           alt={alt}
@@ -29,6 +27,11 @@ export default function ClickableImage({ src, alt, width, height, sizes, classNa
           height={height}
           className={className ?? "w-full h-auto object-contain"}
           sizes={sizes}
+        />
+        {/* Full-area click target — covers every visible pixel */}
+        <div
+          className="absolute inset-0 cursor-zoom-in"
+          onClick={() => setOpen(true)}
         />
       </div>
       {open && (

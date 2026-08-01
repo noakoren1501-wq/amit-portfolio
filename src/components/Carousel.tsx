@@ -35,7 +35,6 @@ export default function Carousel({ images }: CarouselProps) {
   const prev = useCallback(() => goTo(index - 1), [goTo, index]);
   const next = useCallback(() => goTo(index + 1), [goTo, index]);
 
-  // After landing on a clone, silently snap to the real slide
   useEffect(() => {
     if (!transitioning) return;
     if (index === 0) {
@@ -58,7 +57,6 @@ export default function Carousel({ images }: CarouselProps) {
     return () => window.removeEventListener("keydown", onKey);
   }, [next, prev, viewerSrc]);
 
-  // Touch / swipe
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -72,28 +70,31 @@ export default function Carousel({ images }: CarouselProps) {
   };
 
   const realIndex = index === 0 ? images.length - 1 : index === total - 1 ? 0 : index - 1;
-
   const openViewer = () => setViewerSrc(images[realIndex].src);
 
   if (images.length === 1) {
     return (
       <>
-        <div
-          className="rounded-2xl overflow-hidden bg-[#EEEEE8] flex items-center justify-center cursor-zoom-in"
-          onClick={openViewer}
-        >
+        {/* position:relative so the overlay can use absolute inset-0 */}
+        <div className="relative rounded-2xl overflow-hidden bg-[#EEEEE8]">
           <Image
             src={images[0].src}
             alt={images[0].alt}
             width={900}
             height={1200}
-            className="w-full h-auto object-contain max-h-[80vh]"
+            className="w-full h-auto object-contain max-h-[80vh] block"
             sizes="(max-width: 768px) 100vw, 1280px"
             priority
           />
+          {/* Transparent overlay — covers every pixel, no dead zones */}
+          <div className="absolute inset-0 cursor-zoom-in" onClick={openViewer} />
         </div>
         {viewerSrc && (
-          <ImageViewer src={viewerSrc} alt={images[0].alt} onClose={() => setViewerSrc(null)} />
+          <ImageViewer
+            src={viewerSrc}
+            alt={images[0].alt}
+            onClose={() => setViewerSrc(null)}
+          />
         )}
       </>
     );
@@ -104,10 +105,9 @@ export default function Carousel({ images }: CarouselProps) {
       <div className="relative select-none" ref={containerRef}>
         {/* Slide track */}
         <div
-          className="overflow-hidden rounded-2xl bg-[#EEEEE8] cursor-zoom-in"
+          className="overflow-hidden rounded-2xl bg-[#EEEEE8]"
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
-          onClick={openViewer}
         >
           <div
             className="flex"
@@ -120,7 +120,7 @@ export default function Carousel({ images }: CarouselProps) {
             {extended.map((img, i) => (
               <div
                 key={`${img.src}-${i}`}
-                className="flex items-center justify-center bg-[#EEEEE8]"
+                className="relative flex items-center justify-center bg-[#EEEEE8]"
                 style={{ width: `${100 / total}%` }}
               >
                 <Image
@@ -128,17 +128,22 @@ export default function Carousel({ images }: CarouselProps) {
                   alt={img.alt}
                   width={900}
                   height={1200}
-                  className="w-full h-auto object-contain max-h-[80vh]"
+                  className="w-full h-auto object-contain max-h-[80vh] block"
                   sizes="(max-width: 768px) 100vw, 1280px"
                   priority={i === 1}
                   draggable={false}
+                />
+                {/* Transparent overlay — covers every pixel of this slide */}
+                <div
+                  className="absolute inset-0 cursor-zoom-in"
+                  onClick={openViewer}
                 />
               </div>
             ))}
           </div>
         </div>
 
-        {/* Prev arrow — RTL: prev = right side */}
+        {/* Prev arrow — RTL: right side, z-10 sits above the z-0 overlay */}
         <button
           onClick={(e) => { e.stopPropagation(); prev(); }}
           aria-label="הקודם"
@@ -152,7 +157,7 @@ export default function Carousel({ images }: CarouselProps) {
           </svg>
         </button>
 
-        {/* Next arrow — RTL: next = left side */}
+        {/* Next arrow — RTL: left side */}
         <button
           onClick={(e) => { e.stopPropagation(); next(); }}
           aria-label="הבא"
