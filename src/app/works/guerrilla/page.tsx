@@ -1,6 +1,6 @@
-import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import Carousel from "@/components/Carousel";
+import ClickableImage from "@/components/ClickableImage";
 
 export default function GuerrillaPage() {
   return (
@@ -34,16 +34,10 @@ export default function GuerrillaPage() {
       <FadeIn>
         <div className="py-20 border-b border-[#E6E6E4]">
           <div className="mb-8">
-            <h2
-              className="text-2xl md:text-3xl font-black text-[#1A1A1A]"
-              style={{ fontFamily: "var(--font-heebo)" }}
-            >
+            <h2 className="text-2xl md:text-3xl font-black text-[#1A1A1A]" style={{ fontFamily: "var(--font-heebo)" }}>
               פנגו
             </h2>
-            <p
-              className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl"
-              style={{ fontFamily: "var(--font-heebo)" }}
-            >
+            <p className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl" style={{ fontFamily: "var(--font-heebo)" }}>
               ברגע שמסיימים לחנות, אנשים שוכחים להפעיל פנגו. המהלך מזכיר להם — ברגע האחרון.
             </p>
           </div>
@@ -63,34 +57,23 @@ export default function GuerrillaPage() {
       <FadeIn>
         <div className="py-20 border-b border-[#E6E6E4]">
           <div className="mb-8">
-            <h2
-              className="text-2xl md:text-3xl font-black text-[#1A1A1A]"
-              style={{ fontFamily: "var(--font-heebo)" }}
-            >
+            <h2 className="text-2xl md:text-3xl font-black text-[#1A1A1A]" style={{ fontFamily: "var(--font-heebo)" }}>
               הלפרין
             </h2>
-            <p
-              className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl"
-              style={{ fontFamily: "var(--font-heebo)" }}
-            >
+            <p className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl" style={{ fontFamily: "var(--font-heebo)" }}>
               מתישהו כולנו נצטרך משקפיים. הזמן מתקתק — ושעוני התחנה נראים כמו עדשות.
             </p>
           </div>
-          <a
-            href="/images/guerrilla/halperin.jpg"
-            target="_blank"
-            rel="noopener"
-            className="block max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8] cursor-zoom-in"
-          >
-            <Image
+          <div className="max-w-xl mx-auto">
+            <ClickableImage
               src="/images/guerrilla/halperin.jpg"
               alt="הלפרין – משקפיים ענק בתחנת רכבת"
               width={900}
               height={1200}
-              className="w-full h-auto object-contain"
               sizes="(max-width: 768px) 100vw, 672px"
+              className="w-full h-auto object-contain"
             />
-          </a>
+          </div>
         </div>
       </FadeIn>
 
@@ -98,16 +81,10 @@ export default function GuerrillaPage() {
       <FadeIn>
         <div className="py-20">
           <div className="mb-8">
-            <h2
-              className="text-2xl md:text-3xl font-black text-[#1A1A1A]"
-              style={{ fontFamily: "var(--font-heebo)" }}
-            >
+            <h2 className="text-2xl md:text-3xl font-black text-[#1A1A1A]" style={{ fontFamily: "var(--font-heebo)" }}>
               Tinder
             </h2>
-            <p
-              className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl"
-              style={{ fontFamily: "var(--font-heebo)" }}
-            >
+            <p className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl" style={{ fontFamily: "var(--font-heebo)" }}>
               כולם פותחים קרטון ביצים לפני שקונים. מתוך ההומור הרווקי של am:pm — Tinder על אריזות הביצים.
             </p>
           </div>

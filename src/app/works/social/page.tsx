@@ -1,6 +1,6 @@
-import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import Carousel from "@/components/Carousel";
+import ClickableImage from "@/components/ClickableImage";
 
 export default function SocialPage() {
   return (
@@ -34,34 +34,23 @@ export default function SocialPage() {
       <FadeIn>
         <div className="py-20 border-b border-[#E6E6E4]">
           <div className="mb-8">
-            <h2
-              className="text-2xl md:text-3xl font-black text-[#1A1A1A]"
-              style={{ fontFamily: "var(--font-heebo)" }}
-            >
+            <h2 className="text-2xl md:text-3xl font-black text-[#1A1A1A]" style={{ fontFamily: "var(--font-heebo)" }}>
               פוסט לעמותת &quot;קול החתולים&quot;
             </h2>
-            <p
-              className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl"
-              style={{ fontFamily: "var(--font-heebo)" }}
-            >
+            <p className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl" style={{ fontFamily: "var(--font-heebo)" }}>
               פוסט שמעודד לסרס ולעקר חתולים עד גיל חמישה חודשים — כדי &quot;להאריך להם את התוקף&quot;.
             </p>
           </div>
-          <a
-            href="/images/social/cat-voice-cover.jpg"
-            target="_blank"
-            rel="noopener"
-            className="block max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8] cursor-zoom-in"
-          >
-            <Image
+          <div className="max-w-xl mx-auto">
+            <ClickableImage
               src="/images/social/cat-voice-cover.jpg"
               alt="יש להם מה להגיד – קול החתולים"
               width={900}
               height={1200}
-              className="w-full h-auto object-contain max-h-[80vh]"
               sizes="(max-width: 768px) 100vw, 576px"
+              className="w-full h-auto object-contain max-h-[80vh]"
             />
-          </a>
+          </div>
         </div>
       </FadeIn>
 
@@ -69,16 +58,10 @@ export default function SocialPage() {
       <FadeIn>
         <div className="py-20">
           <div className="mb-8">
-            <h2
-              className="text-2xl md:text-3xl font-black text-[#1A1A1A]"
-              style={{ fontFamily: "var(--font-heebo)" }}
-            >
+            <h2 className="text-2xl md:text-3xl font-black text-[#1A1A1A]" style={{ fontFamily: "var(--font-heebo)" }}>
               לפעמים גם AI מפספס
             </h2>
-            <p
-              className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl"
-              style={{ fontFamily: "var(--font-heebo)" }}
-            >
+            <p className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl" style={{ fontFamily: "var(--font-heebo)" }}>
               קרוסלת סושיאל שממחישה בהומור שגם בינה מלאכותית לא תמיד מבינה למה באמת התכוונו.
             </p>
           </div>

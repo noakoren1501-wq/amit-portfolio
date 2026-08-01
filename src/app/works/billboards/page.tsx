@@ -1,6 +1,6 @@
-import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import Carousel from "@/components/Carousel";
+import ClickableImage from "@/components/ClickableImage";
 
 export default function BillboardsPage() {
   return (
@@ -34,16 +34,10 @@ export default function BillboardsPage() {
       <FadeIn>
         <div className="py-20 border-b border-[#E6E6E4]">
           <div className="mb-8">
-            <h2
-              className="text-2xl md:text-3xl font-black text-[#1A1A1A]"
-              style={{ fontFamily: "var(--font-heebo)" }}
-            >
+            <h2 className="text-2xl md:text-3xl font-black text-[#1A1A1A]" style={{ fontFamily: "var(--font-heebo)" }}>
               קטשופ &quot;אסם&quot;
             </h2>
-            <p
-              className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl"
-              style={{ fontFamily: "var(--font-heebo)" }}
-            >
+            <p className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl" style={{ fontFamily: "var(--font-heebo)" }}>
               יש אנשים שלא מתחילים ארוחה בלי קטשופ. אחרים בוחרים מאכלים רק כדי לשים עליהם קטשופ.
             </p>
           </div>
@@ -63,34 +57,23 @@ export default function BillboardsPage() {
       <FadeIn>
         <div className="py-20">
           <div className="mb-8">
-            <h2
-              className="text-2xl md:text-3xl font-black text-[#1A1A1A]"
-              style={{ fontFamily: "var(--font-heebo)" }}
-            >
+            <h2 className="text-2xl md:text-3xl font-black text-[#1A1A1A]" style={{ fontFamily: "var(--font-heebo)" }}>
               תחתונים מחטבים
             </h2>
-            <p
-              className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl"
-              style={{ fontFamily: "var(--font-heebo)" }}
-            >
+            <p className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl" style={{ fontFamily: "var(--font-heebo)" }}>
               המחטב &quot;מוריד מידה&quot; — אז האות XL הופכת ל־L.
             </p>
           </div>
-          <a
-            href="/images/billboards/shapewear.jpg"
-            target="_blank"
-            rel="noopener"
-            className="block max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8] cursor-zoom-in"
-          >
-            <Image
+          <div className="max-w-xl mx-auto">
+            <ClickableImage
               src="/images/billboards/shapewear.jpg"
               alt="המחטב – שלט חוצות"
               width={900}
               height={1200}
-              className="w-full h-auto object-contain max-h-[80vh]"
               sizes="(max-width: 768px) 100vw, 576px"
+              className="w-full h-auto object-contain max-h-[80vh]"
             />
-          </a>
+          </div>
         </div>
       </FadeIn>
 
