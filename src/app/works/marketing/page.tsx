@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
+import BackButton from "@/components/BackButton";
 
 const projects = [
   {
@@ -96,6 +97,11 @@ export default function MarketingPage() {
             </Link>
           </FadeIn>
         ))}
+      </div>
+
+      {/* ── BACK ── */}
+      <div className="mt-16">
+        <BackButton href="/works" label="חזרה לעבודות" />
       </div>
 
     </div>

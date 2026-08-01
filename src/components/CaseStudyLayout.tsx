@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BackButton from "./BackButton";
 import FadeIn from "./FadeIn";
 
 export interface CaseStudyMeta {
@@ -15,6 +16,8 @@ interface CaseStudyLayoutProps extends CaseStudyMeta {
   breadcrumbCategory: string;
   breadcrumbHref: string;
   label: string;
+  backHref?: string;
+  backLabel?: string;
   children: React.ReactNode;
 }
 
@@ -22,6 +25,8 @@ export default function CaseStudyLayout({
   breadcrumbCategory,
   breadcrumbHref,
   label,
+  backHref = "/works",
+  backLabel = "חזרה לעבודות",
   campaignTitle,
   client,
   type,
@@ -151,18 +156,9 @@ export default function CaseStudyLayout({
           {children}
         </div>
 
-        {/* ── BACK TO WORKS ── */}
+        {/* ── BACK ── */}
         <div className="pt-20 pb-4">
-          <Link
-            href="/works"
-            className="inline-flex items-center gap-2 text-sm font-semibold transition-colors hover:text-[#D7B94B]"
-            style={{ color: "rgba(26,26,26,0.4)" }}
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M10 3l-5 5 5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            חזרה לעבודות
-          </Link>
+          <BackButton href={backHref} label={backLabel} />
         </div>
 
       </div>

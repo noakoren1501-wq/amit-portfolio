@@ -40,6 +40,8 @@ export default function HamashbirPage() {
     <CaseStudyLayout
       breadcrumbCategory="קמפיינים"
       breadcrumbHref="/works/marketing"
+      backHref="/works/marketing"
+      backLabel="חזרה לקמפיינים"
       label="המשביר"
       campaignTitle="המשביר"
       client="המשביר לצרכן"

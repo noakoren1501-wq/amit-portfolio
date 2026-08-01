@@ -50,7 +50,11 @@
       "Bash(rm -rf .git)",
       "Bash(git commit -m ' *)",
       "PowerShell(npm install -g vercel 2>&1)",
-      "PowerShell(vercel --version)"
+      "PowerShell(vercel --version)",
+      "PowerShell(vercel whoami 2>&1)",
+      "Bash(git commit -m 'Replace cursor-zoom-in with cursor-pointer on image overlays *)",
+      "WebFetch(domain:maayanahum.co.il)",
+      "Bash(npx tsc *)"
     ]
   }
 }

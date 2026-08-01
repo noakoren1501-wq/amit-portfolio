@@ -1,6 +1,7 @@
 import FadeIn from "@/components/FadeIn";
 import Carousel from "@/components/Carousel";
 import ClickableImage from "@/components/ClickableImage";
+import BackButton from "@/components/BackButton";
 
 export default function BillboardsPage() {
   return (
@@ -76,6 +77,11 @@ export default function BillboardsPage() {
           </div>
         </div>
       </FadeIn>
+
+      {/* ── BACK ── */}
+      <div className="mt-16">
+        <BackButton href="/works" label="חזרה לעבודות" />
+      </div>
 
     </div>
   );

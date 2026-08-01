@@ -47,6 +47,8 @@ export default function PlanetPage() {
     <CaseStudyLayout
       breadcrumbCategory="קמפיינים"
       breadcrumbHref="/works/marketing"
+      backHref="/works/marketing"
+      backLabel="חזרה לקמפיינים"
       label="PLANET"
       campaignTitle="אירועי PLANET"
       client="PLANET"

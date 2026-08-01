@@ -1,3 +1,4 @@
+import BackButton from "./BackButton";
 import FadeIn from "./FadeIn";
 import ProjectCard, { ProjectItem } from "./ProjectCard";
 
@@ -83,6 +84,11 @@ export default function CategoryPageLayout({
           </div>
         </FadeIn>
       )}
+
+      {/* ── BACK ── */}
+      <div className="mt-16">
+        <BackButton href="/works" label="חזרה לעבודות" />
+      </div>
 
     </div>
   );

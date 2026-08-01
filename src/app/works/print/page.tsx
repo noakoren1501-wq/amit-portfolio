@@ -1,5 +1,6 @@
 import FadeIn from "@/components/FadeIn";
 import Carousel from "@/components/Carousel";
+import BackButton from "@/components/BackButton";
 
 const projects = [
   {
@@ -82,6 +83,11 @@ export default function PrintPage() {
           </div>
         </FadeIn>
       ))}
+
+      {/* ── BACK ── */}
+      <div className="mt-16">
+        <BackButton href="/works" label="חזרה לעבודות" />
+      </div>
 
     </div>
   );

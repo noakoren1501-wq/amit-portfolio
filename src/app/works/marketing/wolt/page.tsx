@@ -27,6 +27,8 @@ export default function WoltPage() {
     <CaseStudyLayout
       breadcrumbCategory="קמפיינים"
       breadcrumbHref="/works/marketing"
+      backHref="/works/marketing"
+      backLabel="חזרה לקמפיינים"
       label="Wolt"
       campaignTitle="Wolt"
       client="Wolt"
