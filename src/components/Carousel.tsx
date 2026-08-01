@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import ImageViewer from "./ImageViewer";
+import CarouselViewer from "./CarouselViewer";
 
 export interface ProjectImage {
   src: string;
@@ -20,7 +20,8 @@ export default function Carousel({ images }: CarouselProps) {
 
   const [index, setIndex] = useState(1);
   const [transitioning, setTransitioning] = useState(true);
-  const [viewerSrc, setViewerSrc] = useState<string | null>(null);
+  // null = closed; number = open at that index
+  const [viewerStart, setViewerStart] = useState<number | null>(null);
   const touchStartX = useRef<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -49,13 +50,13 @@ export default function Carousel({ images }: CarouselProps) {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (viewerSrc) return;
+      if (viewerStart !== null) return; // viewer handles its own keys
       if (e.key === "ArrowLeft") next();
       if (e.key === "ArrowRight") prev();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [next, prev, viewerSrc]);
+  }, [next, prev, viewerStart]);
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -70,12 +71,10 @@ export default function Carousel({ images }: CarouselProps) {
   };
 
   const realIndex = index === 0 ? images.length - 1 : index === total - 1 ? 0 : index - 1;
-  const openViewer = () => setViewerSrc(images[realIndex].src);
 
   if (images.length === 1) {
     return (
       <>
-        {/* position:relative so the overlay can use absolute inset-0 */}
         <div className="relative rounded-2xl overflow-hidden bg-[#EEEEE8]">
           <Image
             src={images[0].src}
@@ -86,14 +85,17 @@ export default function Carousel({ images }: CarouselProps) {
             sizes="(max-width: 768px) 100vw, 1280px"
             priority
           />
-          {/* Transparent overlay — covers every pixel, no dead zones */}
-          <div className="absolute inset-0 cursor-pointer" style={{ touchAction: "manipulation" }} onClick={openViewer} />
+          <div
+            className="absolute inset-0 cursor-pointer"
+            style={{ touchAction: "manipulation" }}
+            onClick={() => setViewerStart(0)}
+          />
         </div>
-        {viewerSrc && (
-          <ImageViewer
-            src={viewerSrc}
-            alt={images[0].alt}
-            onClose={() => setViewerSrc(null)}
+        {viewerStart !== null && (
+          <CarouselViewer
+            images={images}
+            startIndex={viewerStart}
+            onClose={() => setViewerStart(null)}
           />
         )}
       </>
@@ -133,18 +135,17 @@ export default function Carousel({ images }: CarouselProps) {
                   priority={i === 1}
                   draggable={false}
                 />
-                {/* Transparent overlay — covers every pixel of this slide */}
                 <div
                   className="absolute inset-0 cursor-pointer"
                   style={{ touchAction: "manipulation" }}
-                  onClick={openViewer}
+                  onClick={() => setViewerStart(realIndex)}
                 />
               </div>
             ))}
           </div>
         </div>
 
-        {/* Prev arrow — RTL: right side, z-10 sits above the z-0 overlay */}
+        {/* Prev arrow — RTL: right side */}
         <button
           onClick={(e) => { e.stopPropagation(); prev(); }}
           aria-label="הקודם"
@@ -196,11 +197,11 @@ export default function Carousel({ images }: CarouselProps) {
         </div>
       </div>
 
-      {viewerSrc && (
-        <ImageViewer
-          src={viewerSrc}
-          alt={images[realIndex].alt}
-          onClose={() => setViewerSrc(null)}
+      {viewerStart !== null && (
+        <CarouselViewer
+          images={images}
+          startIndex={viewerStart}
+          onClose={() => setViewerStart(null)}
         />
       )}
     </>

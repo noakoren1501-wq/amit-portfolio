@@ -35,11 +35,8 @@ export default function ImageViewer({ src, alt, onClose }: ImageViewerProps) {
     setTimeout(onClose, 340);
   };
 
-  const backdropAnim = closing
-    ? "backdropOut 0.32s ease forwards"
-    : "backdropIn 0.32s ease forwards";
-
-  const boxAnim = closing
+  const backdropAnim = closing ? "backdropOut 0.32s ease forwards" : "backdropIn 0.32s ease forwards";
+  const imgAnim = closing
     ? "viewerOut 0.30s cubic-bezier(0.4,0,1,1) forwards"
     : "viewerIn 0.42s cubic-bezier(0.34,1.18,0.64,1) forwards";
 
@@ -60,7 +57,7 @@ export default function ImageViewer({ src, alt, onClose }: ImageViewerProps) {
         }}
       />
 
-      {/* Centred image box */}
+      {/* Centred image */}
       <div
         style={{
           position: "fixed",
@@ -72,34 +69,25 @@ export default function ImageViewer({ src, alt, onClose }: ImageViewerProps) {
           pointerEvents: "none",
         }}
       >
-        <div
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={alt}
+          draggable={false}
           onClick={(e) => e.stopPropagation()}
           style={{
+            display: "block",
+            // Constrain to viewport — browser preserves aspect ratio automatically
             maxWidth: "min(92vw, 1280px)",
-            maxHeight: "92vh",
-            borderRadius: 20,
-            overflow: "hidden",
-            backgroundColor: "#F8F7F2",
-            pointerEvents: "auto",
-            animation: boxAnim,
+            maxHeight: "88vh",
+            width: "auto",
+            height: "auto",
+            borderRadius: 16,
             boxShadow: "0 32px 96px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.06)",
+            pointerEvents: "auto",
+            animation: imgAnim,
           }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={src}
-            alt={alt}
-            draggable={false}
-            style={{
-              display: "block",
-              maxWidth: "min(92vw, 1280px)",
-              maxHeight: "92vh",
-              width: "auto",
-              height: "auto",
-              objectFit: "contain",
-            }}
-          />
-        </div>
+        />
       </div>
 
       {/* Close button — top-left for RTL layout */}
