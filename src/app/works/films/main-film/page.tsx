@@ -17,10 +17,10 @@ export default function MainFilmPage() {
           </Link>
           <span className="opacity-40">/</span>
           <Link href="/works/films" className="hover:opacity-70 transition-opacity">
-            סרטים
+            וידאו
           </Link>
           <span className="opacity-40">/</span>
-          <span style={{ color: "rgba(26,26,26,0.4)" }}>סרט הפרסום</span>
+          <span style={{ color: "rgba(26,26,26,0.4)" }}>עגלה של קפה</span>
         </nav>
       </FadeIn>
 
@@ -43,7 +43,7 @@ export default function MainFilmPage() {
             className="mt-6 text-base leading-relaxed max-w-xl"
             style={{ color: "rgba(26,26,26,0.55)", fontFamily: "var(--font-heebo)" }}
           >
-            עגלת קפה הממוקמת בעמק חפר, סמוך לכביש מרכזי. בחרנו להציג אותה כמקום המושלם לזוגות, אבל... לא רק.
+            עגלת קפה בעמק חפר. המקום המושלם לזוגות – אבל לא רק.
           </p>
         </FadeIn>
       </div>
@@ -51,12 +51,23 @@ export default function MainFilmPage() {
       {/* ── VIDEO ── */}
       <FadeIn delay={120}>
         <div className="max-w-xl mx-auto">
-          <VideoPlayer
-            src="/videos/films/main-film.mp4"
-            poster="/images/films/main-film-cover.jpg"
-          />
+          <VideoPlayer src="/videos/films/main-film.mp4" poster="/images/films/cover.jpg" />
         </div>
       </FadeIn>
+
+      {/* ── BACK ── */}
+      <div className="mt-16">
+        <Link
+          href="/works"
+          className="inline-flex items-center gap-2 text-sm font-semibold transition-colors hover:text-[#D7B94B]"
+          style={{ color: "rgba(26,26,26,0.4)" }}
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M10 3l-5 5 5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          חזרה לעבודות
+        </Link>
+      </div>
 
     </div>
   );

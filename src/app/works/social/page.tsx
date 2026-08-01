@@ -1,9 +1,14 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
+import { useState } from "react";
 import FadeIn from "@/components/FadeIn";
 import Carousel from "@/components/Carousel";
+import Lightbox from "@/components/Lightbox";
 
 export default function SocialPage() {
+  const [catOpen, setCatOpen] = useState(false);
+
   return (
     <div className="max-w-[1280px] mx-auto px-6 md:px-16 pb-32">
 
@@ -31,7 +36,7 @@ export default function SocialPage() {
         </FadeIn>
       </div>
 
-      {/* ── PROJECT 1: יש להם מה להגיד ── */}
+      {/* ── PROJECT 1: קול החתולים ── */}
       <FadeIn>
         <div className="py-20 border-b border-[#E6E6E4]">
           <div className="mb-8">
@@ -39,23 +44,19 @@ export default function SocialPage() {
               className="text-2xl md:text-3xl font-black text-[#1A1A1A]"
               style={{ fontFamily: "var(--font-heebo)" }}
             >
-              פוסט לעמותת "קול החתולים"
+              פוסט לעמותת &quot;קול החתולים&quot;
             </h2>
             <p
               className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl"
               style={{ fontFamily: "var(--font-heebo)" }}
             >
-              פוסט סושיאל שמטרתו לעודד בעלי חתולים לסרס ולעקר אותם עד גיל חמישה חודשים, במטרה "להאריך להם את התוקף".
+              פוסט שמעודד לסרס ולעקר חתולים עד גיל חמישה חודשים — כדי &quot;להאריך להם את התוקף&quot;.
             </p>
-            <Link
-              href="/works/social/cat-voice"
-              className="inline-block mt-4 text-xs tracking-[0.2em] uppercase font-semibold transition-opacity hover:opacity-60"
-              style={{ color: "#D7B94B" }}
-            >
-              לפרויקט ↗
-            </Link>
           </div>
-          <div className="max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8]">
+          <div
+            className="max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8] cursor-zoom-in"
+            onClick={() => setCatOpen(true)}
+          >
             <Image
               src="/images/social/cat-voice-cover.jpg"
               alt="יש להם מה להגיד – קול החתולים"
@@ -84,13 +85,6 @@ export default function SocialPage() {
             >
               קרוסלת סושיאל שממחישה בהומור שגם בינה מלאכותית לא תמיד מבינה למה באמת התכוונו.
             </p>
-            <Link
-              href="/works/social/ai-carousel"
-              className="inline-block mt-4 text-xs tracking-[0.2em] uppercase font-semibold transition-opacity hover:opacity-60"
-              style={{ color: "#D7B94B" }}
-            >
-              לפרויקט ↗
-            </Link>
           </div>
           <div className="max-w-xl mx-auto">
             <Carousel
@@ -108,6 +102,16 @@ export default function SocialPage() {
           </div>
         </div>
       </FadeIn>
+
+      {catOpen && (
+        <Lightbox
+          images={[{ src: "/images/social/cat-voice-cover.jpg", alt: "יש להם מה להגיד – קול החתולים" }]}
+          index={0}
+          onClose={() => setCatOpen(false)}
+          onPrev={() => {}}
+          onNext={() => {}}
+        />
+      )}
 
     </div>
   );

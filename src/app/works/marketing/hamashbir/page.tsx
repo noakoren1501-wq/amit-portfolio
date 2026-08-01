@@ -38,7 +38,7 @@ function SectionText({ children }: { children: React.ReactNode }) {
 export default function HamashbirPage() {
   return (
     <CaseStudyLayout
-      breadcrumbCategory="מהלכי שיווק"
+      breadcrumbCategory="קמפיינים"
       breadcrumbHref="/works/marketing"
       label="המשביר"
       campaignTitle="המשביר"

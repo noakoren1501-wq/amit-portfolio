@@ -25,7 +25,7 @@ function SectionLabel({ number, title }: { number: string; title: string }) {
 export default function WoltPage() {
   return (
     <CaseStudyLayout
-      breadcrumbCategory="מהלכי שיווק"
+      breadcrumbCategory="קמפיינים"
       breadcrumbHref="/works/marketing"
       label="Wolt"
       campaignTitle="Wolt"

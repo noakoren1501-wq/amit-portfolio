@@ -1,9 +1,14 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
+import { useState } from "react";
 import FadeIn from "@/components/FadeIn";
 import Carousel from "@/components/Carousel";
+import Lightbox from "@/components/Lightbox";
 
 export default function GuerrillaPage() {
+  const [halperinOpen, setHalperinOpen] = useState(false);
+
   return (
     <div className="max-w-[1280px] mx-auto px-6 md:px-16 pb-32">
 
@@ -45,15 +50,8 @@ export default function GuerrillaPage() {
               className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl"
               style={{ fontFamily: "var(--font-heebo)" }}
             >
-              מהלך גרילה המתבסס על העובדה שברגע שמסיימים לחנות, אנשים רבים שוכחים להפעיל פנגו. המהלך מזכיר להם ברגע האחרון להפעיל את החניה. בנוסף, המשפטים נכתבו בהשראת הדרך שבה אנשים "מתבכיינים" אחרי שקיבלו דוח, ולכן הם מנוסחים כאילו הם מיועדים לילדים.
+              ברגע שמסיימים לחנות, אנשים שוכחים להפעיל פנגו. המהלך מזכיר להם — ברגע האחרון.
             </p>
-            <Link
-              href="/works/guerrilla/pango"
-              className="inline-block mt-4 text-xs tracking-[0.2em] uppercase font-semibold transition-opacity hover:opacity-60"
-              style={{ color: "#D7B94B" }}
-            >
-              לפרויקט ↗
-            </Link>
           </div>
           <div className="max-w-xl mx-auto">
             <Carousel
@@ -81,17 +79,13 @@ export default function GuerrillaPage() {
               className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl"
               style={{ fontFamily: "var(--font-heebo)" }}
             >
-              מהלך גרילה לרשת "הלפרין" המבוסס על התובנה שמתישהו כולנו נצטרך משקפיים, ולכן זה רק עניין של זמן. מכאן נבחרו השעונים בתחנות הרכבת, שנראים כמו עדשות משקפיים וממחישים שהזמן מתקתק עד לרגע שבו נזדקק להן.
+              מתישהו כולנו נצטרך משקפיים. הזמן מתקתק — ושעוני התחנה נראים כמו עדשות.
             </p>
-            <Link
-              href="/works/guerrilla/halperin"
-              className="inline-block mt-4 text-xs tracking-[0.2em] uppercase font-semibold transition-opacity hover:opacity-60"
-              style={{ color: "#D7B94B" }}
-            >
-              לפרויקט ↗
-            </Link>
           </div>
-          <div className="max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8]">
+          <div
+            className="max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8] cursor-zoom-in"
+            onClick={() => setHalperinOpen(true)}
+          >
             <Image
               src="/images/guerrilla/halperin.jpg"
               alt="הלפרין – משקפיים ענק בתחנת רכבת"
@@ -118,15 +112,8 @@ export default function GuerrillaPage() {
               className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl"
               style={{ fontFamily: "var(--font-heebo)" }}
             >
-              מהלך גרילה שמכניס את עולם ההיכרויות למדף הביצים. התובנה היא שכל מי שקונה ביצים פותח קודם את הקרטון כדי לבדוק שאין ביצים שבורות. מתוך ההומור המאפיין את הרווקים התל־אביביים שמסתובבים ב־am:pm, נוצר מהלך שמציג את Tinder בצורה משעשעת ובלתי צפויה על גבי אריזות הביצים.
+              כולם פותחים קרטון ביצים לפני שקונים. מתוך ההומור הרווקי של am:pm — Tinder על אריזות הביצים.
             </p>
-            <Link
-              href="/works/guerrilla/tinder"
-              className="inline-block mt-4 text-xs tracking-[0.2em] uppercase font-semibold transition-opacity hover:opacity-60"
-              style={{ color: "#D7B94B" }}
-            >
-              לפרויקט ↗
-            </Link>
           </div>
           <div className="max-w-xl mx-auto">
             <Carousel
@@ -138,6 +125,16 @@ export default function GuerrillaPage() {
           </div>
         </div>
       </FadeIn>
+
+      {halperinOpen && (
+        <Lightbox
+          images={[{ src: "/images/guerrilla/halperin.jpg", alt: "הלפרין – משקפיים ענק בתחנת רכבת" }]}
+          index={0}
+          onClose={() => setHalperinOpen(false)}
+          onPrev={() => {}}
+          onNext={() => {}}
+        />
+      )}
 
     </div>
   );

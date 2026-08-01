@@ -7,11 +7,11 @@ import { useRef, useState } from "react";
 const worksCategories = [
   { label: "כל העבודות", href: "/works" },
   { label: "מודעות", href: "/works/print" },
-  { label: "סרטים", href: "/works/films" },
+  { label: "וידאו", href: "/works/films" },
   { label: "סושיאל", href: "/works/social" },
   { label: "שלטי חוצות", href: "/works/billboards" },
   { label: "גרילה", href: "/works/guerrilla" },
-  { label: "מהלכי שיווק", href: "/works/marketing" },
+  { label: "קמפיינים", href: "/works/marketing" },
 ];
 
 export default function Header() {
@@ -120,7 +120,7 @@ export default function Header() {
               isActive("/contact") ? "text-[#D7B94B]" : "text-[#1A1A1A]"
             }`}
           >
-            צור קשר
+            צרו קשר
           </Link>
         </nav>
       </div>

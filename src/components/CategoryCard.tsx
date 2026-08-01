@@ -4,11 +4,10 @@ import Image from "next/image";
 interface CategoryCardProps {
   href: string;
   name: string;
-  count: string;
   coverImage?: string;
 }
 
-export default function CategoryCard({ href, name, count, coverImage }: CategoryCardProps) {
+export default function CategoryCard({ href, name, coverImage }: CategoryCardProps) {
   return (
     <Link href={href} className="group block">
       <div
@@ -46,15 +45,6 @@ export default function CategoryCard({ href, name, count, coverImage }: Category
           >
             {name}
           </h2>
-          <p
-            className="mt-3 text-sm font-light"
-            style={{
-              color: coverImage ? "rgba(255,255,255,0.6)" : "rgba(26,26,26,0.38)",
-              fontFamily: "var(--font-heebo)",
-            }}
-          >
-            {count}
-          </p>
         </div>
       </div>
     </Link>

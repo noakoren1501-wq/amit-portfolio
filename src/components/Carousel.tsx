@@ -2,7 +2,12 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ProjectImage } from "./ProjectPageLayout";
+import Lightbox from "./Lightbox";
+
+export interface ProjectImage {
+  src: string;
+  alt: string;
+}
 
 interface CarouselProps {
   images: ProjectImage[];
@@ -13,8 +18,9 @@ export default function Carousel({ images }: CarouselProps) {
   const extended = [images[images.length - 1], ...images, images[0]];
   const total = extended.length;
 
-  const [index, setIndex] = useState(1); // start on the real first slide
+  const [index, setIndex] = useState(1);
   const [transitioning, setTransitioning] = useState(true);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const touchStartX = useRef<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -42,15 +48,15 @@ export default function Carousel({ images }: CarouselProps) {
     }
   }, [index, transitioning, total, images.length, goTo]);
 
-  // Keyboard navigation
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (lightboxIndex !== null) return;
       if (e.key === "ArrowLeft") next();
       if (e.key === "ArrowRight") prev();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [next, prev]);
+  }, [next, prev, lightboxIndex]);
 
   // Touch / swipe
   const onTouchStart = (e: React.TouchEvent) => {
@@ -65,32 +71,48 @@ export default function Carousel({ images }: CarouselProps) {
     touchStartX.current = null;
   };
 
-  // Real slide index for dot display
   const realIndex = index === 0 ? images.length - 1 : index === total - 1 ? 0 : index - 1;
+
+  const openLightbox = () => setLightboxIndex(realIndex);
+  const closeLightbox = () => setLightboxIndex(null);
+  const lightboxPrev = () =>
+    setLightboxIndex((i) => (i === null ? 0 : (i - 1 + images.length) % images.length));
+  const lightboxNext = () =>
+    setLightboxIndex((i) => (i === null ? 0 : (i + 1) % images.length));
 
   if (images.length === 1) {
     return (
-      <div className="rounded-2xl overflow-hidden bg-[#EEEEE8] flex items-center justify-center">
-        <Image
-          src={images[0].src}
-          alt={images[0].alt}
-          width={900}
-          height={1200}
-          className="w-full h-auto object-contain max-h-[80vh]"
-          sizes="(max-width: 768px) 100vw, 1280px"
-          priority
-        />
-      </div>
+      <>
+        <div
+          className="rounded-2xl overflow-hidden bg-[#EEEEE8] flex items-center justify-center cursor-zoom-in"
+          onClick={openLightbox}
+        >
+          <Image
+            src={images[0].src}
+            alt={images[0].alt}
+            width={900}
+            height={1200}
+            className="w-full h-auto object-contain max-h-[80vh]"
+            sizes="(max-width: 768px) 100vw, 1280px"
+            priority
+          />
+        </div>
+        {lightboxIndex !== null && (
+          <Lightbox images={images} index={lightboxIndex} onClose={closeLightbox} onPrev={lightboxPrev} onNext={lightboxNext} />
+        )}
+      </>
     );
   }
 
   return (
+    <>
     <div className="relative select-none" ref={containerRef}>
       {/* Slide track */}
       <div
-        className="overflow-hidden rounded-2xl bg-[#EEEEE8]"
+        className="overflow-hidden rounded-2xl bg-[#EEEEE8] cursor-zoom-in"
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
+        onClick={openLightbox}
       >
         <div
           className="flex"
@@ -123,7 +145,7 @@ export default function Carousel({ images }: CarouselProps) {
 
       {/* Prev arrow — RTL: prev = right side */}
       <button
-        onClick={prev}
+        onClick={(e) => { e.stopPropagation(); prev(); }}
         aria-label="הקודם"
         className="absolute top-1/2 -translate-y-1/2 right-0 translate-x-1/2 z-10
                    w-11 h-11 rounded-full bg-white/90 backdrop-blur-sm border border-[#E6E6E4]
@@ -137,7 +159,7 @@ export default function Carousel({ images }: CarouselProps) {
 
       {/* Next arrow — RTL: next = left side */}
       <button
-        onClick={next}
+        onClick={(e) => { e.stopPropagation(); next(); }}
         aria-label="הבא"
         className="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-1/2 z-10
                    w-11 h-11 rounded-full bg-white/90 backdrop-blur-sm border border-[#E6E6E4]
@@ -157,7 +179,7 @@ export default function Carousel({ images }: CarouselProps) {
             role="tab"
             aria-selected={i === realIndex}
             aria-label={`שקופית ${i + 1}`}
-            onClick={() => goTo(i + 1)}
+            onClick={(e) => { e.stopPropagation(); goTo(i + 1); }}
             className="transition-all duration-300"
             style={{
               width: i === realIndex ? 20 : 6,
@@ -172,5 +194,10 @@ export default function Carousel({ images }: CarouselProps) {
         ))}
       </div>
     </div>
+
+    {lightboxIndex !== null && (
+      <Lightbox images={images} index={lightboxIndex} onClose={closeLightbox} onPrev={lightboxPrev} onNext={lightboxNext} />
+    )}
+    </>
   );
 }

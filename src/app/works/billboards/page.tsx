@@ -1,9 +1,14 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
+import { useState } from "react";
 import FadeIn from "@/components/FadeIn";
 import Carousel from "@/components/Carousel";
+import Lightbox from "@/components/Lightbox";
 
 export default function BillboardsPage() {
+  const [shapewearOpen, setShapewearOpen] = useState(false);
+
   return (
     <div className="max-w-[1280px] mx-auto px-6 md:px-16 pb-32">
 
@@ -39,21 +44,14 @@ export default function BillboardsPage() {
               className="text-2xl md:text-3xl font-black text-[#1A1A1A]"
               style={{ fontFamily: "var(--font-heebo)" }}
             >
-              קטשופ "אסם"
+              קטשופ &quot;אסם&quot;
             </h2>
             <p
               className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl"
               style={{ fontFamily: "var(--font-heebo)" }}
             >
-              סדרת שלטי חוצות המתבססת על התובנה שיש אנשים שלא מתחילים ארוחה בלי קטשופ, ואף בוחרים מאכלים מסוימים רק כדי להוסיף להם קטשופ.
+              יש אנשים שלא מתחילים ארוחה בלי קטשופ. אחרים בוחרים מאכלים רק כדי לשים עליהם קטשופ.
             </p>
-            <Link
-              href="/works/billboards/ketchup"
-              className="inline-block mt-4 text-xs tracking-[0.2em] uppercase font-semibold transition-opacity hover:opacity-60"
-              style={{ color: "#D7B94B" }}
-            >
-              לפרויקט ↗
-            </Link>
           </div>
           <div className="max-w-xl mx-auto">
             <Carousel
@@ -81,17 +79,13 @@ export default function BillboardsPage() {
               className="mt-3 text-base text-[#1A1A1A]/55 leading-relaxed max-w-xl"
               style={{ fontFamily: "var(--font-heebo)" }}
             >
-              שלט חוצות המתבסס על העובדה שתחתונים מחטבים נועדו להקטין נשים פיזית. המהלך יוצר פרובוקציה פיקטיבית כדי למשוך תשומת לב, כאשר ברמה העיצובית המחטב "מוריד מידה" ולכן האות XL הופכת ל־L.
+              המחטב &quot;מוריד מידה&quot; — אז האות XL הופכת ל־L.
             </p>
-            <Link
-              href="/works/billboards/shapewear"
-              className="inline-block mt-4 text-xs tracking-[0.2em] uppercase font-semibold transition-opacity hover:opacity-60"
-              style={{ color: "#D7B94B" }}
-            >
-              לפרויקט ↗
-            </Link>
           </div>
-          <div className="max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8]">
+          <div
+            className="max-w-xl mx-auto rounded-2xl overflow-hidden bg-[#EEEEE8] cursor-zoom-in"
+            onClick={() => setShapewearOpen(true)}
+          >
             <Image
               src="/images/billboards/shapewear.jpg"
               alt="המחטב – שלט חוצות"
@@ -103,6 +97,16 @@ export default function BillboardsPage() {
           </div>
         </div>
       </FadeIn>
+
+      {shapewearOpen && (
+        <Lightbox
+          images={[{ src: "/images/billboards/shapewear.jpg", alt: "המחטב – שלט חוצות" }]}
+          index={0}
+          onClose={() => setShapewearOpen(false)}
+          onPrev={() => {}}
+          onNext={() => {}}
+        />
+      )}
 
     </div>
   );

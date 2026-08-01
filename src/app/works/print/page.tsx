@@ -1,20 +1,17 @@
-import Link from "next/link";
 import FadeIn from "@/components/FadeIn";
 import Carousel from "@/components/Carousel";
 
 const projects = [
   {
-    href: "/works/print/lemon-waffle",
     title: "שוקו בשקית",
-    description: "מודעת פרינט הבנויה סביב התובנה שברגע שלוקחים שוקו בשקית – מתחייבים אליו.",
+    description: "אי אפשר להניח את השקית כי היא תישפך.",
     images: [
       { src: "/images/print/lemon-waffle-1.jpg", alt: "שוקו בשקית – מודעה 1" },
     ],
   },
   {
-    href: "/works/print/stain-remover",
     title: "מסיר כתמים",
-    description: "סדרת מודעות פרינט טיפוגרפית שנוצרה מהתובנה שלפעמים הבגדים מתלכלכים 'אוכלים איתך', ותמיד יהיה את האדם שימצא את הדרך היצירתית והמציקה להעיר על זה.",
+    description: "סדרת מודעות פרינט טיפוגרפית על הרגע שהבגד אוכל איתך.",
     images: [
       { src: "/images/print/stain-remover-1.jpg", alt: "מסיר כתמים – מודעה 1" },
       { src: "/images/print/stain-remover-2.jpg", alt: "מסיר כתמים – מודעה 2" },
@@ -23,9 +20,8 @@ const projects = [
     ],
   },
   {
-    href: "/works/print/shampoo",
     title: "שמפו 2 ב־1",
-    description: "סדרת מודעות פרינט שנוצרה מהתובנה שלגברים קשה לבצע שתי פעולות במקביל, אז מזל שיש שמפו 2 ב־1.",
+    description: "לגברים קשה לבצע שתי פעולות במקביל. מזל שיש שמפו 2 ב־1.",
     images: [
       { src: "/images/print/shampoo-1.jpg", alt: "שמפו – מודעה 1" },
       { src: "/images/print/shampoo-2.jpg", alt: "שמפו – מודעה 2" },
@@ -64,7 +60,7 @@ export default function PrintPage() {
 
       {/* ── PROJECTS ── */}
       {projects.map((project, i) => (
-        <FadeIn key={project.href} delay={i * 80}>
+        <FadeIn key={project.title} delay={i * 80}>
           <div className={`py-20 ${i < projects.length - 1 ? "border-b border-[#E6E6E4]" : ""}`}>
             <div className="mb-8">
               <h2
@@ -79,13 +75,6 @@ export default function PrintPage() {
               >
                 {project.description}
               </p>
-              <Link
-                href={project.href}
-                className="inline-block mt-4 text-xs tracking-[0.2em] uppercase font-semibold transition-opacity hover:opacity-60"
-                style={{ color: "#D7B94B" }}
-              >
-                לפרויקט ↗
-              </Link>
             </div>
             <div className="max-w-xl mx-auto">
               <Carousel images={project.images} />

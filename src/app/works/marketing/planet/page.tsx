@@ -45,7 +45,7 @@ function EmptyMedia({ className, style }: { className?: string; style?: React.CS
 export default function PlanetPage() {
   return (
     <CaseStudyLayout
-      breadcrumbCategory="מהלכי שיווק"
+      breadcrumbCategory="קמפיינים"
       breadcrumbHref="/works/marketing"
       label="PLANET"
       campaignTitle="אירועי PLANET"
