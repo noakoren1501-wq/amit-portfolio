@@ -30,7 +30,7 @@ export default function ClickableImage({ src, alt, width, height, sizes, classNa
         />
         {/* Full-area click target — covers every visible pixel */}
         <div
-          className="absolute inset-0 cursor-zoom-in"
+          className="absolute inset-0 cursor-pointer"
           onClick={() => setOpen(true)}
         />
       </div>

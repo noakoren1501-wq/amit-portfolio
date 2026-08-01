@@ -87,7 +87,7 @@ export default function Carousel({ images }: CarouselProps) {
             priority
           />
           {/* Transparent overlay — covers every pixel, no dead zones */}
-          <div className="absolute inset-0 cursor-zoom-in" onClick={openViewer} />
+          <div className="absolute inset-0 cursor-pointer" onClick={openViewer} />
         </div>
         {viewerSrc && (
           <ImageViewer
@@ -135,7 +135,7 @@ export default function Carousel({ images }: CarouselProps) {
                 />
                 {/* Transparent overlay — covers every pixel of this slide */}
                 <div
-                  className="absolute inset-0 cursor-zoom-in"
+                  className="absolute inset-0 cursor-pointer"
                   onClick={openViewer}
                 />
               </div>
