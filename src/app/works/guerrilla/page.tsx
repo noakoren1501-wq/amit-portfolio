@@ -55,6 +55,7 @@ export default function GuerrillaPage() {
           </div>
           <div className="max-w-xl mx-auto">
             <Carousel
+              title="פנגו"
               images={[
                 { src: "/images/guerrilla/pango-floor.jpg", alt: "Pango – כתובת על רצפת החניה" },
                 { src: "/images/guerrilla/pango-screen-1.jpg", alt: "Pango – מסך ניווט ברכב" },
@@ -117,6 +118,7 @@ export default function GuerrillaPage() {
           </div>
           <div className="max-w-xl mx-auto">
             <Carousel
+              title="Tinder"
               images={[
                 { src: "/images/guerrilla/tinder.jpg", alt: "Tinder – פרסומת על קרטון ביצים בסופרמרקט" },
                 { src: "/images/guerrilla/tinder-2.jpg", alt: "Tinder – עיצוב קרטון הביצים" },
@@ -130,6 +132,7 @@ export default function GuerrillaPage() {
         <Lightbox
           images={[{ src: "/images/guerrilla/halperin.jpg", alt: "הלפרין – משקפיים ענק בתחנת רכבת" }]}
           index={0}
+          title="הלפרין"
           onClose={() => setHalperinOpen(false)}
           onPrev={() => {}}
           onNext={() => {}}

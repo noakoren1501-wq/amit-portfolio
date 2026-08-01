@@ -55,6 +55,7 @@ export default function BillboardsPage() {
           </div>
           <div className="max-w-xl mx-auto">
             <Carousel
+              title='קטשופ "אסם"'
               images={[
                 { src: "/images/billboards/ketchup-1.jpg", alt: "אסם קטשופ – שלט חוצות 1" },
                 { src: "/images/billboards/ketchup-2.jpg", alt: "אסם קטשופ – שלט חוצות 2" },
@@ -102,6 +103,7 @@ export default function BillboardsPage() {
         <Lightbox
           images={[{ src: "/images/billboards/shapewear.jpg", alt: "המחטב – שלט חוצות" }]}
           index={0}
+          title="תחתונים מחטבים"
           onClose={() => setShapewearOpen(false)}
           onPrev={() => {}}
           onNext={() => {}}

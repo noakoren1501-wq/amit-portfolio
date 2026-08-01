@@ -88,6 +88,7 @@ export default function SocialPage() {
           </div>
           <div className="max-w-xl mx-auto">
             <Carousel
+              title="לפעמים גם AI מפספס"
               images={[
                 { src: "/images/social/ai-carousel-1.png", alt: "לפעמים גם AI מפספס – שקופית 1" },
                 { src: "/images/social/ai-carousel-2.png", alt: "לפעמים גם AI מפספס – שקופית 2" },
@@ -107,6 +108,7 @@ export default function SocialPage() {
         <Lightbox
           images={[{ src: "/images/social/cat-voice-cover.jpg", alt: "יש להם מה להגיד – קול החתולים" }]}
           index={0}
+          title='פוסט לעמותת "קול החתולים"'
           onClose={() => setCatOpen(false)}
           onPrev={() => {}}
           onNext={() => {}}

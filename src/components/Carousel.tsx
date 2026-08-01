@@ -11,9 +11,10 @@ export interface ProjectImage {
 
 interface CarouselProps {
   images: ProjectImage[];
+  title?: string;
 }
 
-export default function Carousel({ images }: CarouselProps) {
+export default function Carousel({ images, title }: CarouselProps) {
   // Clone first and last for infinite loop: [last, ...images, first]
   const extended = [images[images.length - 1], ...images, images[0]];
   const total = extended.length;
@@ -98,7 +99,7 @@ export default function Carousel({ images }: CarouselProps) {
           />
         </div>
         {lightboxIndex !== null && (
-          <Lightbox images={images} index={lightboxIndex} onClose={closeLightbox} onPrev={lightboxPrev} onNext={lightboxNext} />
+          <Lightbox images={images} index={lightboxIndex} title={title} onClose={closeLightbox} onPrev={lightboxPrev} onNext={lightboxNext} />
         )}
       </>
     );
@@ -196,7 +197,7 @@ export default function Carousel({ images }: CarouselProps) {
     </div>
 
     {lightboxIndex !== null && (
-      <Lightbox images={images} index={lightboxIndex} onClose={closeLightbox} onPrev={lightboxPrev} onNext={lightboxNext} />
+      <Lightbox images={images} index={lightboxIndex} title={title} onClose={closeLightbox} onPrev={lightboxPrev} onNext={lightboxNext} />
     )}
     </>
   );
