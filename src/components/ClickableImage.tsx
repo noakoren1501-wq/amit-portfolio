@@ -18,8 +18,12 @@ export default function ClickableImage({ src, alt, width, height, sizes, classNa
 
   return (
     <>
-      {/* position:relative so the transparent overlay can use inset-0 */}
-      <div className="relative rounded-2xl overflow-hidden bg-[#EEEEE8]">
+      <button
+        type="button"
+        className="block w-full rounded-2xl overflow-hidden bg-[#EEEEE8] border-0 p-0 cursor-pointer"
+        style={{ touchAction: "manipulation" }}
+        onClick={() => setOpen(true)}
+      >
         <Image
           src={src}
           alt={alt}
@@ -28,12 +32,7 @@ export default function ClickableImage({ src, alt, width, height, sizes, classNa
           className={className ?? "w-full h-auto object-contain"}
           sizes={sizes}
         />
-        {/* Full-area click target — covers every visible pixel */}
-        <div
-          className="absolute inset-0 cursor-pointer"
-          onClick={() => setOpen(true)}
-        />
-      </div>
+      </button>
       {open && (
         <ImageViewer src={src} alt={alt} onClose={() => setOpen(false)} />
       )}
